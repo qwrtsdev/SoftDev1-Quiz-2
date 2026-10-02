@@ -1,61 +1,57 @@
 import 'package:flutter/material.dart';
 
+import './game_page.dart';
+import './result_page.dart';
+
 void main() {
-  runApp(const MainApp());
+  runApp(const MyApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: HomePage());
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+    );
   }
 }
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
-
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final _controller = TextEditingController();
-  String _message = '';
-
   @override
   void dispose() {
-    _controller.dispose();
     super.dispose();
-  }
-
-  void _submit() {
-    setState(() {
-      _message = 'Hello! ${_controller.text}';
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: _controller,
-              decoration: const InputDecoration(
-                labelText: 'Enter your name',
-                border: OutlineInputBorder(),
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('RockPaperScissor', style: const TextStyle(fontSize: 20)),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const GamePage()),
+                  );
+                },
+                child: const Text('Start'),
               ),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(onPressed: _submit, child: const Text('Submit')),
-            const SizedBox(height: 16),
-            Text(_message, style: const TextStyle(fontSize: 20)),
-          ],
+            ],
+          ),
         ),
       ),
     );
