@@ -10,10 +10,10 @@ class GamePage extends StatefulWidget {
 
 class _GamePageState extends State<GamePage> {
   int turn = 1;
-  int player_one_choice = 0;
-  int player_two_choice = 0;
+  String player_one_choice = '';
+  String player_two_choice = '';
 
-  void _handleSelection(int selecion) {
+  void _handleSelection(String selecion) {
     if (turn == 1) {
       setState(() {
         player_one_choice = selecion;
@@ -48,26 +48,30 @@ class _GamePageState extends State<GamePage> {
             children: [
               Text('Player ${turn} Turn', style: const TextStyle(fontSize: 20)),
               const SizedBox(height: 16),
+              Text(
+                'You picked: ${turn == 1 ? player_one_choice : player_two_choice}',
+              ),
+              const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    onPressed: () => _handleSelection(1),
+                    onPressed: () => _handleSelection('Rock'),
                     child: const Text('Rock'),
                   ),
                   SizedBox(width: 8),
                   ElevatedButton(
-                    onPressed: () => _handleSelection(2),
+                    onPressed: () => _handleSelection('Paper'),
                     child: const Text('Paper'),
                   ),
                   SizedBox(width: 8),
                   ElevatedButton(
-                    onPressed: () => _handleSelection(3),
+                    onPressed: () => _handleSelection('Scissor'),
                     child: const Text('Scissor'),
                   ),
                 ],
               ),
-              SizedBox(width: 12),
+              SizedBox(height: 12),
               ElevatedButton(
                 onPressed: _handleSubmit,
                 child: const Text('Submit'),
