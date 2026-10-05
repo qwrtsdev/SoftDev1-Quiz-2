@@ -33,7 +33,12 @@ class _GamePageState extends State<GamePage> {
     } else if (turn == 2) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (_) => const ResultPage()),
+        MaterialPageRoute(
+          builder: (_) => ResultPage(
+            player_one_choice: player_one_choice,
+            player_two_choice: player_two_choice,
+          ),
+        ),
       );
     }
   }
